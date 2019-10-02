@@ -229,23 +229,3 @@ table {
 .hiddenn {
     display: none;
 }
-
-.login {
-    background:rgba(2, 45, 68, 0.27);
-    padding: 42px 35px;
-    margin:5em auto;
-}
-
-input.ggg{
-    width: 100%;
-    padding: 15px 0px 15px 15px;
-    border: 1px solid #fff;
-    outline: none;
-    font-size: 14px;
-    color: #fff;
-    margin: 14px 0px;
-    background: none;
-}
-.container{
-    margin:4m auto;
-}
