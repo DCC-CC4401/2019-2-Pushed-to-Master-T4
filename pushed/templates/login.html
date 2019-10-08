@@ -15,7 +15,7 @@
 <body>
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<div class="col-md-6 login m-2">
+			<div class="col-md-7 login m-2">
 				<h1 class="gris" style="text-align: center">PUSHED TO MASTER</h1>
 				<br>
 				<h2>¿Quiénes Somos?</h2>
@@ -24,33 +24,36 @@
 				<h2>¿Cuál es nuestro objetivo?</h2>
 				<p>Contruir un sistema que permita registrar y analizar el uso de tiempo del usuario bajo la premisa de que con esta información será capaz de identificar cómo ser más eficaz respecto a este.
 				</p>
+
 			</div>
 			<div class="col-md-4 login m-2">
 					<div class="gris" style="text-align: center">
-				
-					<h2>LOGIN</h2>	
-					</div>
-						<form method="post" novalidate="">
-							{% csrf_token %}
-							
-							<input type="email" class="ggg" name="Email" placeholder="E-MAIL" required="">
-							<input type="password" class="ggg" name="Password" placeholder="PASSWORD" required="">
 
-								<div class="clearfix"></div>
-								<div class="d-flex align-items-end flex-column">
-								<div class="mt-auto p-2"><input type="submit" class="btn btn-sm btn-success" value="Sign In" name="login"></div>
-							</div>
+					<img src="{% static 'img/opti.png' %}" style="margin: 0 auto; display:block; width:60%" alt="">
+					
+					<br>
+					<h2>INICIAR SESIÓN</h2>	
+					</div>
+						<form method="post">
+							{% csrf_token %}
+							{{ form }}
+
+							<div class="clearfix"></div>
+							<div class="d-flex align-items-end flex-column">
+							<div class="mt-auto p-2"><input type="submit" class="btn btn-sm btn-success" value="INICIAR SESIÓN" name="login"></div>
+							</div>						
 						</form>
 							<span class="gris"><input type="checkbox" />Remember Me</span>
 							<h6 class="gris"><a href="#">Forgot Password?</a></h6>						
 			</div>
-		</div>			
-		
+		</div>				
 	</div>
+	<footer>
+	© 2019 Pushed To Master. All rights reserved	
+	</footer>
 <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
-s

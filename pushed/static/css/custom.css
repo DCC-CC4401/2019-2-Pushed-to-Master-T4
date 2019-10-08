@@ -13,10 +13,21 @@ p {
 }
 
 body {
+    background: rgb(190,238,174);
+    background: radial-gradient(circle, rgba(190,238,174,1) 13%, rgba(167,210,229,1) 100%);
+}
+
+.wrapper{
     background-color: #f8f8f8;
 }
 
-
+footer{
+    position: absolute;
+    padding: 2em 0;
+    left: 0;
+    right: 0;
+    text-align: center;    
+}
 /* ESPACIADO STANDAR */
 
 .spaced {
@@ -247,7 +258,7 @@ input.ggg{
     background: none;
 }
 .container{
-    margin:4em auto;
+    margin: 4em auto 1em auto;
 }
 
 .blanco {

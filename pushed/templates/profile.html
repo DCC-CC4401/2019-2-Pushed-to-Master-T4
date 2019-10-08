@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Perfil de Usuario</title>
+    <title>Pushed to Master | Perfil</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
@@ -16,55 +16,21 @@
 <div class="wrapper">
 
     <!--SIDEBAR-->
-    <nav id="sidebar">
-        <div class="sidebar-header text-center py-5">
-            <h1>LOGO</h1>
-        </div>
-        <div class="text-center py-3">
-            <img src="{% static 'img/turing.jpg' %}" class="avatar px-2 py-2">
-            <p class="h6">Bienvenido, <br> Nombre de usuario</p>
-        </div>
-        <ul class="list-unstyled components text-left">
-            <li>
-                <a href="{% url 'index' %}">Inicio</a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Perfil</a>
-                <ul class="collapse list-unstyled text-left" id="pageSubmenu">
-                    <li>
-                        <a href="{% url 'profile' %}">Mi Perfil</a>
-                    </li>
-                    <li>
-                        <a href="#">Seguridad</a>
-                    </li>
-                    <li>
-                        <a href="#">Amigos</a>
-                    </li>
-                    <li>
-                        <a href="#">Mis Actividades</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Otra cosa</a>
-            </li>
-        </ul>
-
-        <ul class="list-unstyled text-center py-4">
-            <button type="button" class="btn btn-danger cerrar-sesion">Cerrar Sesión</button>
-        </ul>
-    </nav>
-
+    {% include 'sidebar.html' %}
 
     <!--CONTENIDO PAGINA-->
     <div class="container-fluid p-4 main">
         <div class="row">
-            <img src="{% static 'img/turing.jpg' %}" class="circular mx-auto d-block shadow" height="250px">
+            <img src="{{ user.image_url | default:'static/img/avatar.png'}}" class="circular mx-auto d-block shadow" height="250px">
         </div>
         <div class="row py-4">
             <div class="col text-center">
-                <p class="h4 text-center text-dark">Nombre de usuario</p>
-                <button type="button" class="btn btn-success">Cambiar imagen</button>
+
+                <form method="post" id="photo" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="files" class="btn btn-success" style="text-align: center">Cambiar foto</label>
+                <input type="file" id="files" name="myfile" style="display: none;" onchange="this.form.submit()">
+              </form>
             </div>
         </div>
 
@@ -107,7 +73,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Nombre:</label>
                                 <input type="text" id="disabledTextInputNombre" class="form-control"
-                                       placeholder="Nombre usuario">
+                                       placeholder="{{request.user.first_name}}">
                             </div>
                         </fieldset>
 
@@ -116,7 +82,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Apellidos:</label>
                                 <input type="text" id="disabledTextInputApellidos" class="form-control"
-                                       placeholder="Apellidos usuario">
+                                       placeholder="{{request.user.last_name}}">
                             </div>
                         </fieldset>
 
@@ -125,7 +91,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Correo electronico:</label>
                                 <input type="text" id="disabledTextInput" class="form-control"
-                                       placeholder="correo@usuario.com">
+                                       placeholder="{{request.user.email}}">
                             </div>
                         </fieldset>
 
@@ -134,7 +100,7 @@
                             <div class="form-group">
                                 <label for="disabledTextInput">Fecha de Nacimiento:</label>
                                 <input type="text" id="disabledTextInputFechaNacimiento" class="form-control"
-                                       placeholder="dd/mm/yyyy">
+                                       placeholder="{{request.user.fecha}}">
                             </div>
                         </fieldset>
                     </form>
@@ -142,32 +108,28 @@
 
                 <!--PESTAÑA SEGURIDAD-->
                 <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel" aria-labelledby="Seguridad-tab">
-                    <form>
-                        <!--Contraseña actual-->
-                        <fieldset disabled>
+                    <form method="post"  id="post-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form}}
+                        <!-- <div class="form-group">
+                            <label for="exampleInputEmail1">Nueva contraseña</label>
+                            <input type="password" id="new_pass" class="form-control" placeholder="Ingrese Contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Confirme nueva contraseña</label>
+                            <input type="password" id="confirm_pass"  class="form-control" placeholder="Confirme contraseña">
+                        </div>                        
+
+                        <fieldset>
                             <div class="form-group">
-                                <label for="disabledTextInput">Contraseña actual:</label>
-                                <input type="text" id="disabledTextInputContraseñaActual" class="form-control"
+                                <label for="disabledTextInput">Ingrese contraseña actual:</label>
+                                <input type="password" id="password" class="form-control"
                                        placeholder="************">
                             </div>
-                        </fieldset>
-
-                        <!--Contraseña nueva-->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Nueva Contraseña</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" placeholder="Nueva Contraseña">
-                        </div>
-
-                        <!--Contraseña confirmacion-->
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Confirmación Contraseña</label>
-                            <input type="email" class="form-control" id="Pass-conf" aria-describedby="emailHelp"
-                                   placeholder="Confirmación Contraseña">
-                        </div>
-
+                        </fieldset> -->
+                        <button type="submit" class="btn btn-success">Cambiar contraseña</button>
                     </form>
-                    <button type="submit" class="btn btn-success">Cambiar contraseña</button>
+                    
                 </div>
 
                 <!--PESTAÑA AMIGOS-->
@@ -365,10 +327,32 @@
 
 <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
-<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/toggleName.js' %}"></script>
 
+<!-- <script>
+        $(document).on('submit', '#post-form',function(e){
+        $.ajax({
+            type:'POST',
+            url:'changepass',
+            data:{
+                password:$('#password').val(),
+                new_pass:$('#new_pass').val(),
+                confirm_pass:$('#confirm_pass').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success:function(){
+                console.log("entro acaaaa");
+                document.getElementById("post-form").reset();
+                alert("Contraseña actualizada.");
+            },
+            error: function() {
+                console.log("no funco"); 
+            }        
+        });
+    });
+</script> -->
 </body>
 
 </html>

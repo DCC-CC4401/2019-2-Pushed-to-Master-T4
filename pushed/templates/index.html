@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Página de Inicio</title>
+    <title>Pushed to Master | Inicio</title>
 
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
@@ -16,49 +16,12 @@
 
 <div class="wrapper">
     <!--SIDEBAR-->
-    <nav id="sidebar">
-        <div class="sidebar-header text-center py-5">
-            <h1>LOGO</h1>
-        </div>
-        <div class="text-center py-3">
-            <img src="{% static 'img/turing.jpg' %}" class="avatar px-2 py-2">
-            <p class="h6">Bienvenido, <br> Nombre de usuario</p>
-        </div>
-        <ul class="list-unstyled components text-left">
-            <li>
-                <a href="#">Inicio</a>
-            </li>
-            <li>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Perfil</a>
-                <ul class="collapse list-unstyled text-left" id="pageSubmenu">
-                    <li>
-                        <a href="{% url 'profile' %}">Mi Perfil</a>
-                    </li>
-                    <li>
-                        <a href="#">Seguridad</a>
-                    </li>
-                    <li>
-                        <a href="#">Amigos</a>
-                    </li>
-                    <li>
-                        <a href="#">Mis Actividades</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Otra cosa</a>
-            </li>
-        </ul>
-
-        <ul class="list-unstyled text-center py-4">
-            <button type="button" class="btn btn-danger">Cerrar Sesión</button>
-        </ul>
-    </nav>
+    {% include 'sidebar.html' %}
     <!--EL RESTO-->
     <div class="container-fluid text-center p-4 main">
         <div class="row p-2 mx-2 rounded shadow table-success">
             <div class="col-9 text-left">
-                <h2 class="pt-2">Horario de actividades</h2>
+                <h2 class="pt-2" style="color: #000">Horario de actividades</h2>
             </div>
             <button class="showButton col-3 h-100 showclock btn btn-primary h3 my-1" id="buttonclock">Iniciar Actividad
                 en tiempo real
@@ -435,7 +398,7 @@
         <!--AGREGAR ACTIVIDAD-->
         <div class="row">
             <div class="col-3 pl-4">
-                <button class="btn btn-success btn-block btn-sm" data-toggle="modal" data-target="#addActivity">Agregar
+                <button class="btn btn-success btn-block btn-sm" style="margin: 0.5em auto;" data-toggle="modal" data-target="#addActivity">Agregar
                     Actividad
                 </button>
             </div>
@@ -532,7 +495,7 @@
                 <div class="dropdown show">
                     <a class="btn btn-success btn-sm btn-block dropdown-toggle dropdown-toggle-split mb-3 shadow"
                        href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
+                       aria-expanded="false" style="margin: 0.5em auto;">
                         Filtros por categoría
                     </a>
                     <div class="dropdown-menu dropdown-menu-right px-4 py-3" aria-labelledby="dropdownMenuLink">
