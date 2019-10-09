@@ -1,0 +1,27 @@
+class Activity(models.Model):
+  name = CharField()
+  description = CharField()
+  category = CharField()
+  
+class TipoActivity(models.Model):
+  activity = ()
+  name = CharField()
+  
+class NormalActivity(models.Model):
+  activity = ()
+  startDate = DateTimeField()
+  endDate = DateTimeField()
+  
+class NormalUser(AbstractUser):
+  name = CharField()
+  lastName = CharField()
+  profilePicture = ImageField()
+  
+class FriendshipRelation(models.Model):
+  user1 = ()
+  user2 = ()
+  state = CharField()
+  
+ActivityBelongToUserRelation(models.Model):
+  user = ()
+  activity = ()
