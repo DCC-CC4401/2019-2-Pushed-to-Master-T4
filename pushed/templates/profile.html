@@ -29,7 +29,9 @@
                 <form method="post" id="photo" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label for="files" class="btn btn-success" style="text-align: center">Cambiar foto</label>
-                <input type="file" id="files" name="myfile" style="display: none;" onchange="this.form.submit()">
+                {{ change_photo }}
+<!--                 
+                <input type="file" id="files" name="myfile" style="display: none;" onchange="this.form.submit()"> -->
               </form>
             </div>
         </div>
@@ -60,7 +62,7 @@
                 </ul>
             </div>
         </div>
-
+    
         <!--CONTENIDO DE LAS PESTAÑAS-->
         <div class="row px-5">
             <div class="tab-content p-4 offset-sm-2 col-sm-8" id="myTabContent">
@@ -108,28 +110,38 @@
 
                 <!--PESTAÑA SEGURIDAD-->
                 <div class="tab-pane fade show disabled" id="Seguridad" role="tabpanel" aria-labelledby="Seguridad-tab">
-                    <form method="post"  id="post-form" enctype="multipart/form-data">
+                {% for message in messages %}
+                  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                    {% endfor %}                    
+                    <form method="post"  id="post-form">
                         {% csrf_token %}
-                        {{form}}
-                        <!-- <div class="form-group">
-                            <label for="exampleInputEmail1">Nueva contraseña</label>
-                            <input type="password" id="new_pass" class="form-control" placeholder="Ingrese Contraseña">
+                        <div class="form-group">
+                            {{ change_pass.new_password.errors }}
+                            <label for="newpass">Nueva contraseña</label>
+                            {{ change_pass.new_password }}
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Confirme nueva contraseña</label>
-                            <input type="password" id="confirm_pass"  class="form-control" placeholder="Confirme contraseña">
+                            {{ change_pass.confirm_password.errors }}
+                            <label for="confirmpass">Confirme nueva contraseña</label>
+                            {{ change_pass.confirm_password }}
                         </div>                        
 
                         <fieldset>
                             <div class="form-group">
-                                <label for="disabledTextInput">Ingrese contraseña actual:</label>
-                                <input type="password" id="password" class="form-control"
-                                       placeholder="************">
+                                {{ change_pass.old_password.errors }}
+                                <label for="oldpass">Ingrese contraseña actual:</label>
+                                {{ change_pass.old_password }}
                             </div>
-                        </fieldset> -->
-                        <button type="submit" class="btn btn-success">Cambiar contraseña</button>
+                        </fieldset>
+                        <button type="submit" name="change" class="btn btn-success">Cambiar contraseña</button>
+
                     </form>
-                    
+
                 </div>
 
                 <!--PESTAÑA AMIGOS-->
@@ -330,29 +342,7 @@
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/toggleName.js' %}"></script>
-
-<!-- <script>
-        $(document).on('submit', '#post-form',function(e){
-        $.ajax({
-            type:'POST',
-            url:'changepass',
-            data:{
-                password:$('#password').val(),
-                new_pass:$('#new_pass').val(),
-                confirm_pass:$('#confirm_pass').val(),
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            },
-            success:function(){
-                console.log("entro acaaaa");
-                document.getElementById("post-form").reset();
-                alert("Contraseña actualizada.");
-            },
-            error: function() {
-                console.log("no funco"); 
-            }        
-        });
-    });
-</script> -->
+<script src="{% static 'js/pulento.js' %}"></script>
 </body>
 
 </html>

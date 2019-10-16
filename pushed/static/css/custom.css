@@ -258,7 +258,7 @@ input.ggg{
     background: none;
 }
 .container{
-    margin: 4em auto 1em auto;
+    margin: 2em auto 1em auto;
 }
 
 .blanco {
@@ -271,4 +271,8 @@ input.ggg{
 
 h2 {
     color: #a8a8a8;
+}
+
+#files {
+    display: none;
 }

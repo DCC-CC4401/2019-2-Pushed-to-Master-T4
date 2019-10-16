@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib.auth import logout as do_logout
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as do_login
-from .forms import LoginForm
+from .forms import *
 from django.shortcuts import redirect
 from django.core.files.storage import FileSystemStorage
 from .models import User
@@ -13,46 +13,46 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
 
+
 def profile(request):
-    if request.method == 'POST':
-        if request.FILES['myfile']:    
-            myfile = request.FILES['myfile']   
-            request.user.image = myfile
-            request.user.save()    
-        # form = PasswordChangeForm(request.user, request.POST)  
-        # if form.is_valid():
-        #     request.user.set_password(request.POST['new_pass']) 
-        #     request.user.save()   
-        #     messages.success(request, 'Your password was successfully updated!')
-        #     update_session_auth_hash(request, user)   
-        # else:
-        #     messages.error(request, 'Please correct the error below.')                    
-                          
     # Si estamos identificados devolvemos el index
     if request.user.is_authenticated:
-        return render(request, "profile.html")
+        if request.method == 'POST':
+            pass_form = PassForm(request.POST)
+            change_photo = ChangePhoto(request.POST, request.FILES)
+            if change_photo.is_valid : 
+                filepath = request.FILES.get('photo', False) 
+                if filepath:
+                    myfile = request.FILES['photo'] 
+                    request.user.image = myfile
+                    request.user.save()  
+
+            if pass_form.is_valid:    
+                old_password = request.POST.get("old_password")
+                new_password = request.POST.get("new_password")
+                confirm_password = request.POST.get("confirm_password")                                                       
+                if old_password and confirm_password and confirm_password == new_password:
+                    if request.user.check_password(old_password):                    
+                        request.user.set_password(request.POST['new_password']) 
+                        request.user.save()   
+                        messages.success(request, 'Your password was updated successfully!', extra_tags='alert')
+                        update_session_auth_hash(request, user)      
+                    else:
+                        messages.warning(request, 'Please correct the error below.')
+
+
+        else:
+            pass_form = PassForm()
+            change_photo = ChangePhoto()
+                
+        return render(request, "profile.html", {'change_pass': pass_form, 'change_photo': change_photo })                                      
+        
     # En otro caso redireccionamos al login
     return redirect('/login') 
-    
-def hack(request):
-    return render(request, "profile.html")
-    
-def change_password(request):
-        if request.method == 'POST':
-            form = PasswordChangeForm(request.user, request.POST)
-            if form.is_valid():
-                user = form.save()
-                update_session_auth_hash(request, user)  # Important!
-                messages.success(request, 'Your password was successfully updated!')
-                return redirect('change_password')
-            else:
-                messages.error(request, 'Please correct the error below.')
-        else:
-            form = PasswordChangeForm(request.user)
-        return render(request, 'accounts/change_password.html', {
-            'form': form
-        })          
-
+  
+                                    
+   
+ 
 def logout(request):
     # Finalizamos la sesión
     do_logout(request)
