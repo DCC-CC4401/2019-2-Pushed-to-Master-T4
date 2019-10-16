@@ -43,7 +43,7 @@
             <div class="col offset-sm-2 col-sm-8">
                 <ul class="nav nav-tabs" id="pestañas-perfil-de-usuario" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-fix active" id="profile-tab-mi-perfil" 
+                        <a class="nav-link nav-link-fix" id="profile-tab-mi-perfil" 
                            href="/perfil" role="tab" aria-controls="home" aria-selected="true">Mi Perfil</a>
                     </li>
                     <li class="nav-item">
@@ -55,7 +55,7 @@
                            role="tab" aria-controls="contact" aria-selected="false">Amigos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-fix" id="contact-tab-actividades" 
+                        <a class="nav-link nav-link-fix active" id="contact-tab-actividades" 
                            href="/actividades" role="tab" aria-controls="contact" aria-selected="false">Mis
                             Actividades</a>
                     </li>
@@ -67,45 +67,46 @@
         <div class="row px-5">
             <div class="tab-content p-4 offset-sm-2 col-sm-8" id="myTabContent">
 
-                <!--PESTAÑA MI PERFIL-->
-                <div class="tab-pane fade show active" id="Perfil" role="tabpanel" aria-labelledby="Perfil-tab">
-                    <form>
-                        <!--Nombre-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Nombre:</label>
-                                <input type="text" id="disabledTextInputNombre" class="form-control"
-                                       placeholder="{{request.user.first_name}}">
-                            </div>
-                        </fieldset>
+                <!-- PESTAÑA ACTIVIDADES -->
+                <div class="tab-pane fade show active" id="Actividades" role="tabpanel" aria-labelledby="Actividades-tab">
 
-                        <!--Apellidos-->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Apellidos:</label>
-                                <input type="text" id="disabledTextInputApellidos" class="form-control"
-                                       placeholder="{{request.user.last_name}}">
-                            </div>
-                        </fieldset>
+                    <button type="button" class="btn btn-primary btn-lg btn-block"> Crear una nueva actividad</button>
 
-                        <!--Correo Electronico -->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Correo electronico:</label>
-                                <input type="text" id="disabledTextInput" class="form-control"
-                                       placeholder="{{request.user.email}}">
-                            </div>
-                        </fieldset>
+                    <div class="card spaced ">
+                        <div class="card-body sleep-activity text-white">
+                            <img src="{% static 'img/bed.png' %}" class="activity-icon invert-color mx-2"> Dormir
+                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        </div>
+                    </div>
 
-                        <!--Fecha de nacimiento -->
-                        <fieldset disabled>
-                            <div class="form-group">
-                                <label for="disabledTextInput">Fecha de Nacimiento:</label>
-                                <input type="text" id="disabledTextInputFechaNacimiento" class="form-control"
-                                       placeholder="{{request.user.fecha}}">
-                            </div>
-                        </fieldset>
-                    </form>
+                    <div class="card spaced">
+                        <div class="card-body study-activity text-white">
+                            <img src="{% static 'img/open-book.png' %}" class="activity-icon invert-color mx-2"> Estudiar
+                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        </div>
+                    </div>
+
+                    <div class="card spaced">
+                        <div class="card-body eat-activity text-white">
+                            <img src="{% static 'img/crossed-knife-and-fork.png' %}" class="activity-icon invert-color mx-2"> Almorzar
+                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        </div>
+                    </div>
+
+                    <div class="card spaced">
+                        <div class="card-body house-activity text-white">
+                            <img src="{% static 'img/washing-machine.png' %}" class="activity-icon invert-color mx-2"> Lavar ropa
+                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        </div>
+                    </div>
+
+                    <div class="card spaced">
+                        <div class="card-body animal-activity text-white">
+                            <img src="{% static 'img/snowshoe-cat.png' %}" class="activity-icon invert-color mx-2"> Jugar con el Michi
+                            <button type="button" class="btn btn-sm btn-primary float-right"> Ver info</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

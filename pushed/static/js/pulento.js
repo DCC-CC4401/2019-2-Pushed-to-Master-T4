@@ -1,9 +1,5 @@
-
-    $aux = false;
-
-
-    $(document).on('submit', '#post-form',function(e){
-    console.log("hola gente");
+$(document).on('submit', '#post-form',function(e){
+    e.preventDefault();
     $.ajax({
         type:'POST',
         url:'seguridad',
@@ -16,12 +12,10 @@
         success:function(){
             console.log("Si funca")
             document.getElementById("post-form").reset();
-            aux = true;
         },
         error: function() {
             console.log("no funco");
-            aux = true; 
         }        
     });
-    });
+});
 

@@ -12,8 +12,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 
-
-
 def profile(request):
     # Si estamos identificados devolvemos el index
     if request.user.is_authenticated:
@@ -35,24 +33,69 @@ def profile(request):
                     if request.user.check_password(old_password):                    
                         request.user.set_password(request.POST['new_password']) 
                         request.user.save()   
-                        messages.success(request, 'Your password was updated successfully!', extra_tags='alert')
-                        update_session_auth_hash(request, user)      
+                        messages.success(request, 'Se ha actualizado tu contraseña.', extra_tags='alert')
+                        update_session_auth_hash(request, request.user)      
                     else:
-                        messages.warning(request, 'Please correct the error below.')
-
-
+                        messages.warning(request, 'Debes ingresar tu contraseña actual.')                    
         else:
             pass_form = PassForm()
             change_photo = ChangePhoto()
+        
                 
-        return render(request, "profile.html", {'change_pass': pass_form, 'change_photo': change_photo })                                      
+        return render(request, "profile.html", {'change_pass': pass_form, 'change_photo': change_photo })
         
     # En otro caso redireccionamos al login
     return redirect('/login') 
-  
-                                    
-   
  
+def seguridad(request):
+    # Si estamos identificados devolvemos el index
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            pass_form = PassForm(request.POST)
+            change_photo = ChangePhoto(request.POST, request.FILES)
+            if change_photo.is_valid : 
+                filepath = request.FILES.get('photo', False) 
+                if filepath:
+                    myfile = request.FILES['photo'] 
+                    request.user.image = myfile
+                    request.user.save()  
+
+            if pass_form.is_valid:    
+                old_password = request.POST.get("old_password")
+                new_password = request.POST.get("new_password")
+                confirm_password = request.POST.get("confirm_password")                                                       
+                if old_password and confirm_password and confirm_password == new_password:
+                    if request.user.check_password(old_password):                    
+                        request.user.set_password(request.POST['new_password']) 
+                        request.user.save()   
+                        messages.success(request, 'Se ha actualizado tu contraseña.', extra_tags='alert')
+                        update_session_auth_hash(request, request.user)      
+                    else:
+                        messages.warning(request, 'Debes ingresar tu contraseña actual.')                    
+        else:
+            pass_form = PassForm()
+            change_photo = ChangePhoto()
+        
+                
+        return render(request, "seguridad.html", {'change_pass': pass_form, 'change_photo': change_photo })
+        
+    # En otro caso redireccionamos al login
+    return redirect('/login') 
+
+def actividades(request):
+    # Si estamos identificados devolvemos el index
+    if request.user.is_authenticated:
+        return render(request, "actividades.html")
+    # En otro caso redireccionamos al login
+    return redirect('/login')
+
+def amigos(request):
+    # Si estamos identificados devolvemos el index
+    if request.user.is_authenticated:
+        return render(request, "amigos.html")
+    # En otro caso redireccionamos al login
+    return redirect('/login')    
+
 def logout(request):
     # Finalizamos la sesión
     do_logout(request)
