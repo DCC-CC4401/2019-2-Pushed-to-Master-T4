@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new class is imported. ##
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -44,7 +44,7 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    
+
     objects = UserManager()     
     @property
     def image_url(self):
@@ -52,7 +52,7 @@ class User(AbstractUser):
             return "static/img/" + self.image.url
         else:
             return "static/img/avatar.png"
-       
+
 
 
 class Activity(models.Model):

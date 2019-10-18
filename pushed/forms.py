@@ -61,9 +61,9 @@ class RegisterForm(UserCreationForm):
         }
     ))  
 
-    class Meta(UserCreationForm.Meta):
+    class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)   
+        fields = ('email','first_name', 'last_name', 'password1', 'password2',)   
 
     def save(self, commit=True):
         # Save the provided password in hashed format
