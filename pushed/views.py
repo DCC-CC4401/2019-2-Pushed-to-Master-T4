@@ -110,19 +110,39 @@ def index(request):
     return redirect('/login')
 
 def login(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and 'login' in request.POST:
         form = LoginForm(request.POST)
+        registro = RegisterForm()
         if form.is_valid():
-            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             # Si existe un usuario con ese nombre y contraseña
             if user is not None:
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos al index
-                return redirect('index')		            
+                return redirect('index')
+
+    elif request.method == 'POST' and 'registrar' in request.POST: 
+        registro = RegisterForm(request.POST) 
+        form = LoginForm()               
+        if registro.is_valid():
+            registro.save()
+            first_name = registro.cleaned_data['first_name']
+            last_name = registro.cleaned_data['last_name']
+            email = registro.cleaned_data['email']
+            password =  registro.cleaned_data['password1']
+            password2 =  registro.cleaned_data['password2']
+            user = authenticate(email=email, password=password)
+            # Si existe un usuario con ese nombre y contraseña
+            if user is not None:
+                # Hacemos el login manualmente
+                do_login(request, user)
+                # Y le redireccionamos al index
+                return redirect('index')                 		            
     else:
         form = LoginForm()
-    return render(request, "login.html", {'form': form})    
+        registro = RegisterForm()
+    return render(request, "login.html", {'form': form,'registro': registro})    
 

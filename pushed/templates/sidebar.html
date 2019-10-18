@@ -5,7 +5,7 @@
     </div>
     <div class="text-center py-3">
         <img src="{{ user.image_url | default:'static/img/avatar.png'}}" class="avatar px-2 py-2">
-        <p class="h6">Bienvenido <br><b>{{request.user.username}}</b></p>
+        <p class="h6">Bienvenido <br><b>{{request.user.first_name}}</b></p>
     </div>
     <ul class="list-unstyled components text-left">
         <li>

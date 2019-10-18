@@ -46,7 +46,8 @@
 							<span class="gris"><input type="checkbox" />Remember Me</span>
 							<h6 class="gris"><a href="#">Forgot Password?</a></h6>		
 							<br>
-							<button class="btn btn-sm btn-primary" style="margin: 0 auto; display: block; width: 90%">
+							<!-- Button trigger modal -->
+				<button data-toggle="modal" data-target="#registro" class="btn btn-sm btn-primary" style="margin: 0 auto; display: block; width: 90%">
 								<h2 style="color: #FFF;">REGISTRARTE</h2></button>		
 			</div>
 		</div>				
@@ -54,6 +55,37 @@
 	<footer>
 	© 2019 Pushed To Master. All rights reserved	
 	</footer>
+
+	<!-- Modal -->
+	<div class="modal fade" id="registro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="titulo">Registrarte</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	
+	      	<form method="post">
+	      		{% csrf_token %}
+	      		{% for field in registro %}
+	      		<div class="form-group">
+			  	{{ field }}  
+			  	</div>
+			  	{% endfor %}
+			  	<button type="submit" id="ayuda" name="registrar" style="display: none" class="btn btn-primary"></button> 		
+	      	</form>
+	        
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button for="ayuda" class="btn btn-primary">Registrate</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
 <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
