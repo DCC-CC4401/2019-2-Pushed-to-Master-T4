@@ -11,6 +11,7 @@ from .models import User
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.http import JsonResponse
 
 def profile(request):
     # Si estamos identificados devolvemos el index
@@ -110,9 +111,9 @@ def index(request):
     return redirect('/login')
 
 def login(request):
+    registro = RegisterForm()  
     if request.method == 'POST' and 'login' in request.POST:
         form = LoginForm(request.POST)
-        registro = RegisterForm()
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
@@ -122,27 +123,30 @@ def login(request):
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos al index
-                return redirect('index')
+                return redirect('index')                              		            
+    else:
+        form = LoginForm() 
+    return render(request, "login.html", {'form': form, 'registro': registro})    
 
-    elif request.method == 'POST' and 'registrar' in request.POST: 
-        registro = RegisterForm(request.POST) 
-        form = LoginForm()               
+def registrar(request):
+    if request.method == 'POST' and 'registrar' in request.POST: 
+        registro = RegisterForm(request.POST, request.FILES)                
         if registro.is_valid():
-            registro.save()
+            instancia = registro.save(commit=False)          
+            instancia.save()      
             first_name = registro.cleaned_data['first_name']
             last_name = registro.cleaned_data['last_name']
             email = registro.cleaned_data['email']
-            password =  registro.cleaned_data['password1']
-            password2 =  registro.cleaned_data['password2']
+            password =  registro.cleaned_data['password1']            
             user = authenticate(email=email, password=password)
             # Si existe un usuario con ese nombre y contraseña
             if user is not None:
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos al index
-                return redirect('index')                 		            
+                return HttpResponse('')
+        else:
+            return JsonResponse(registro.errors)   
     else:
-        form = LoginForm()
-        registro = RegisterForm()
-    return render(request, "login.html", {'form': form,'registro': registro})    
-
+        registro = RegisterForm()             
+    return render(request, "registro.html", {'registro': registro})              

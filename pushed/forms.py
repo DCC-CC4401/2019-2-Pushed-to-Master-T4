@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from pushed.models import User
-
+from django.core.files.storage import FileSystemStorage
 class LoginForm(forms.Form):
     email = forms.CharField(label='',widget=forms.EmailInput(
         attrs={
@@ -26,29 +26,34 @@ class ChangePhoto(forms.Form):
     )
 
 class RegisterForm(UserCreationForm):
+    email = forms.CharField(widget=forms.EmailInput(
+        attrs={
+        'id':'email',
+        'class':'form-control',
+        'placeholder':'Ingrese email (Ej: correo@dominio.com)'
+        }),
+        error_messages={'unique':"El email ingresado ya existe."}     
+        )  
+
     first_name = forms.CharField(max_length=20,widget=forms.TextInput(
         attrs={
+        'id':'first_name',
         'class':'form-control',
-        'placeholder':'Nombre'
+        'placeholder':'Ingrese nombre'
         }
     ))
 
     last_name = forms.CharField(max_length=20,widget=forms.TextInput(
         attrs={
+        'id':'last_name',
         'class':'form-control',
-        'placeholder':'Apellido'
+        'placeholder':'Ingrese apellido'
         }
     ))
 
-    email = forms.CharField(widget=forms.EmailInput(
-        attrs={
-        'class':'form-control',
-        'placeholder':'ejemplo@dominio.com'
-        }   
-    ))  
-
     password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
+        'id':'password1',
         'class':'form-control',
         'placeholder':'Ingrese contraseña'
         }
@@ -56,23 +61,34 @@ class RegisterForm(UserCreationForm):
 
     password2 = forms.CharField(widget=forms.PasswordInput(
         attrs={
+        'id':'password2',
         'class':'form-control',
         'placeholder':'Confirma contraseña'
+        }),
+
+        )  
+    image = forms.FileField(label='',required=False,widget=forms.ClearableFileInput(
+        attrs={
+        'id':'foto',
+        'class':'form-control',
+        'style': 'display: none;'
         }
-    ))  
+        )
+        )
 
     class Meta:
         model = User
-        fields = ('email','first_name', 'last_name', 'password1', 'password2',)   
+        fields = ('email','first_name', 'last_name', 'password1', 'password2','image')   
 
     def save(self, commit=True):
         # Save the provided password in hashed format
         user = super(UserCreationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-        user.email = self.cleaned_data['email']        
+        user.email = self.cleaned_data['email']     
+        user.image = self.cleaned_data.get('image')   
         user.set_password(self.cleaned_data["password1"])
-
+        user.set_password(self.cleaned_data["password2"])
         if commit:
             user.save()
         return user

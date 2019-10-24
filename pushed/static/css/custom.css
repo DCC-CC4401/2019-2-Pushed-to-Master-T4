@@ -276,3 +276,12 @@ h2 {
 #files {
     display: none;
 }
+
+.alert{
+    display: none;
+}
+
+#preview {
+    max-width: 50%;
+    margin-bottom: 1em;
+}

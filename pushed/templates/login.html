@@ -61,28 +61,15 @@
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="titulo">Registrarte</h5>
+	        <h5 class="modal-title" id="titulo">Regístrate</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	
-	      	<form method="post">
-	      		{% csrf_token %}
-	      		{% for field in registro %}
-	      		<div class="form-group">
-			  	{{ field }}  
-			  	</div>
-			  	{% endfor %}
-			  	<button type="submit" id="ayuda" name="registrar" style="display: none" class="btn btn-primary"></button> 		
-	      	</form>
-	        
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button for="ayuda" class="btn btn-primary">Registrate</button>
-	      </div>
+	      	{% block form %}
+        		{% include 'registro.html' with form=registro  %}
+        	{% endblock form %}
 	    </div>
 	  </div>
 	</div>	
@@ -90,5 +77,6 @@
 <script src="{% static 'js/popper.min.js' %}"></script>
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-</body>
+<script src="{% static 'js/ajax.js' %}"></script>
+
 </html>

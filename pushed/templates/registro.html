@@ -1,0 +1,28 @@
+{% block form %}	
+{% load static %}
+
+		<form method="post" id="regis" enctype="multipart/form-data">
+			{% csrf_token %}
+			{% for field in registro %}
+			<div class="form-group">
+			{{ field }}  	
+			</div>
+			{% endfor %}
+			<img id="preview" class="img-thumbnail mx-auto d-block	rounded" src="{% static 'img/avatar.png' %}" alt="Tu foto" />
+			<label for="foto" class="btn btn-success" style="text-align: center;display: block">Sube una foto</label>
+		</form>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div id="emailError"></div>		
+
+			</div>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			<div id="passwordError"></div>		
+			</div>			
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button form="regis" id="registrar" name="registrar" type="submit" class="btn btn-primary">Registrate</button>	
+	      </div>
+
+	
+{% endblock form %}
