@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import *
 from pushed.models import User
 from django.core.files.storage import FileSystemStorage
 class LoginForm(forms.Form):

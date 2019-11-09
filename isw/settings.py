@@ -136,7 +136,6 @@ STATIC_URL = '/static/'
 # my_project/settings.py
 LOGIN_REDIRECT_URL = 'index'
 
-
 AUTH_USER_MODEL = 'pushed.User'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'pushed/static/img/')

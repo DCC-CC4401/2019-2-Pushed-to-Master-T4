@@ -80,16 +80,16 @@
                     </div>
 
                     <!-- Descomentar este pedazo de codigo para ver interfaz resultados busqueda-->
-                    <!-- Enviar solicitud de Amistad
-                    <div class="card spaced" style="width: 100%;">
+                    <!-- Enviar solicitud de Amistad -->
+                    <div class="card spaced" style="width: 100%; margin:1em auto;">
                         <div class="card-header">
                             Resultados búsqueda
                             <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
-                                    data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
-                                    id="friends-toggle" onclick="toggleName(this.id)">Ver más
+                                    data-target="#resultado" aria-expanded="false" aria-controls="friends-list"
+                                    id="friends-toggle-jeje" onclick="toggleName(this.id)">Ver más
                             </button>
                         </div>
-                        <ul class="list-group list-group-flush collapse" id="friends-list">
+                        <ul class="list-group list-group-flush collapse" id="resultado">
                             <li class="list-group-item">
                                 <a href="404" class="fr-link">
                                     Chris Evans</a>
@@ -120,16 +120,16 @@
                             </li>
                         </ul>
                     </div>
-                </div> -->
+                </div>
 
                     <!-- Solicitudes de amistad -->
                     <div class="card spaced" style="width: 100%; margin:1em auto;">
-                        <div class="card-header" style="background-color: #FFFFFF;">
+                        <div class="card-header">
                             Solicitudes
                             <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
                                     data-target="#friends-request-list" aria-expanded="false"
                                     aria-controls="friends-list"
-                                    id="friends-request-toggle" onclick="toggleName(this.id)">Ver más
+                                    id="friends-request-toggle-jaja" onclick="toggleName(this.id)">Ver más
                             </button>
                         </div>
                         <ul class="list-group list-group-flush collapse" id="friends-request-list">
@@ -174,11 +174,11 @@
 
                     <!-- Amigos aceptados -->
                     <div class="card spaced" style="width: 100%; margin:1em auto;">
-                        <div class="card-header" style="background-color: #FFFFFF;">
+                        <div class="card-header">
                             Amigos
                             <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
                                     data-target="#friends-list" aria-expanded="false" aria-controls="friends-list"
-                                    id="friends-toggle" onclick="toggleName(this.id)">Ver más
+                                    id="friends-toggle-jaja" onclick="toggleName(this.id)">Ver más
                             </button>
                         </div>
                         <ul class="list-group list-group-flush collapse" id="friends-list">
@@ -207,6 +207,33 @@
                                 </button>
                             </li>
 
+                        </ul>
+                    </div>
+
+                    <!-- Amigos sugeridos -->
+                    <!-- Diego: Listo los usuarios de la base de datos, views.py/amigos -->
+                    <div class="card spaced" style="width: 100%; margin:1em auto;">
+                        <div class="card-header">
+                            Amigos sugeridos
+                            <button class="btn btn-sm btn-success float-right" type="button" data-toggle="collapse"
+                                    data-target="#sugeridos" aria-expanded="false" aria-controls="friends-list"
+                                    id="friends-toggle" onclick="toggleName(this.id)">Ver más
+                            </button>
+                        </div>
+                        <ul class="list-group list-group-flush collapse" id="sugeridos">
+                            {% for sugeridos in data %}
+                            <li class="list-group-item">
+                                <a href="{% url 'amigo' sugeridos.id sugeridos.first_name %}" class="fr-link">  
+                                {{sugeridos.first_name}}
+                                {{sugeridos.last_name}}
+                                </a>
+
+                                <button type="button" class="btn btn-sm btn-outline-success float-right">Agregar a
+                                    amigos
+                                </button>
+                            </li>                                
+                            {% endfor %}
+                            
                         </ul>
                     </div>
                 </div>

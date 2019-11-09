@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pushed to Master | {{ name }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+    
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!--SIDEBAR-->
+    {% include 'sidebar.html' %}
+
+    <!--CONTENIDO PAGINA-->
+    <div class="container-fluid p-4 main">
+        <div class="row">
+            <img src="../../static/img/{{ img }}" class="circular mx-auto d-block shadow" height="250px">
+        </div>
+
+        <!--MENU CON TABS-->
+
+    
+        <!--CONTENIDO DE LAS PESTAÑAS-->
+        <div class="row px-5">
+            <div class="tab-content p-4 offset-sm-2 col-sm-8" id="myTabContent" style="text-align: center">
+
+                <br>
+                <h1>{{ name }} {{ apellido }}</h1>
+             
+                <!-- <h4>Contacto: {{email}}</h4> -->
+                <button type="button" class="btn btn btn-success">Agregar a
+                    amigos
+                </button>  
+
+                
+                <div class="row mt-5">
+                    <div class="col">
+                        <div>
+                            <p class="h5 text-dark">Datos semanales</p>
+                        </div>
+                        <!--SEMANALES-->
+                        <table class="table table-bordered table-sm shadow">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Categoría</th>
+                                <th scope="col">Promedio</th>
+                                <th scope="col">Suma</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="table-primary">
+                                <td>Dormir</td>
+                                <td>8 hrs.</td>
+                                <td>43 hrs.</td>
+                            </tr>
+                            <tr class="table-success">
+                                <td>Dormir</td>
+                                <td>8 hrs.</td>
+                                <td>43 hrs.</td>
+                            </tr>
+                            <tr class="table-danger">
+                                <td>Dormir</td>
+                                <td>8 hrs.</td>
+                                <td>43 hrs.</td>
+                            </tr>
+                            <tr class="table-warning">
+                                <td>Dormir</td>
+                                <td>8 hrs.</td>
+                                <td>43 hrs.</td>
+                            </tr>
+                            <tr class="table-info">
+                                <td>Dormir</td>
+                                <td>8 hrs.</td>
+                                <td>43 hrs.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/toggleName.js' %}"></script>
+</body>
+
+</html>

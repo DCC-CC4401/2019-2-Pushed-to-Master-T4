@@ -80,23 +80,23 @@
                     <form method="post"  id="post-form">
                         {% csrf_token %}
                         <div class="form-group">
-                            {{ change_pass.new_password.errors }}
                             <label for="newpass">Nueva contraseña</label>
                             {{ change_pass.new_password }}
                         </div>
                         <div class="form-group">
-                            {{ change_pass.confirm_password.errors }}
                             <label for="confirmpass">Confirme nueva contraseña</label>
                             {{ change_pass.confirm_password }}
                         </div>                        
 
                         <fieldset>
                             <div class="form-group">
-                                {{ change_pass.old_password.errors }}
                                 <label for="oldpass">Ingrese contraseña actual:</label>
                                 {{ change_pass.old_password }}
                             </div>
                         </fieldset>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div id="passwordError"></div>      
+            </div>  
                         <button type="submit" class="btn btn-success">Cambiar contraseña</button>
 
                     </form>
@@ -115,7 +115,7 @@
 <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/toggleName.js' %}"></script>
-<script src="{% static 'js/pulento.js' %}"></script>
+<script src="{% static 'js/changepass.js' %}"></script>
 </body>
 
 </html>
