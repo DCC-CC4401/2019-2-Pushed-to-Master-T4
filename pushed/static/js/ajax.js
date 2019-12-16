@@ -40,32 +40,40 @@ $("#foto").change(function() {
 					processData: false,
                 	contentType: false,
 			        success:function(data){
-			        	console.log(data);
-			            $("#emailError").html(data.email);
+
+			        	if(data.hasOwnProperty("email")){
+				            if (data.email.length > 0) {
+				            	$("#passwordError").append(data.email[0]+"<br />").delay(9000).queue(function() {
+								   $(this).html('')
+								});
+				            }
+				        }    
 
 			            if(data == '')
 			            	window.location.href = "/";
 
-			            for (var i = data.password2.length - 1; i >= 0; i--) {
-			            	if (data.password2[i] == "The password is too similar to the first name.") {
-			            		data.password2[i] = "La contraseña no debe ser parecida al nombre.";
-			            	}
-			            	else if (data.password2[i] == "This password is too common."){
-			            		data.password2[i] = "La contraseña ingresada es demasiado común.";
-			            	}
-			            	else if (data.password2[i] == "The two password fields didn't match."){
-			            		data.password2[i] = "Las contraseñas ingresadas no coinciden.";
-			            	}
-							else if (data.password2[i] == "The password is too similar to the last name."){
-								data.password2[i] = "La contraseña no debe ser parecida al apellido.";
-							}
+			            if(data.hasOwnProperty("password2")){
+				            for (var i = data.password2.length - 1; i >= 0; i--) {
+				            	if (data.password2[i] == "The password is too similar to the first name.") {
+				            		data.password2[i] = "La contraseña no debe ser parecida al nombre.";
+				            	}
+				            	else if (data.password2[i] == "This password is too common."){
+				            		data.password2[i] = "La contraseña ingresada es demasiado común.";
+				            	}
+				            	else if (data.password2[i] == "The two password fields didn't match."){
+				            		data.password2[i] = "Las contraseñas ingresadas no coinciden.";
+				            	}
+								else if (data.password2[i] == "The password is too similar to the last name."){
+									data.password2[i] = "La contraseña no debe ser parecida al apellido.";
+								}
 
-			            	$("#passwordError").append(data.password2[i]+"<br />").delay(9000).queue(function() {
-							   $(this).html('')
-							});
+				            	$("#passwordError").append(data.password2[i]+"<br />").delay(9000).queue(function() {
+								   $(this).html('');
+								});
+				            }			            	
 			            }
-
 			            $('#regis')[0].reset();
+			           
 			            $('.alert').fadeIn();
 						$('.close').click(function(){
 					    	$('.alert').fadeOut();
