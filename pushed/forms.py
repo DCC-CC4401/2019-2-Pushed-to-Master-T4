@@ -30,7 +30,7 @@ class RegisterForm(UserCreationForm):
         attrs={
         'id':'email',
         'class':'form-control',
-        'placeholder':'Ingrese email (Ej: correo@dominio.com)'
+        'placeholder':'Email (Ej: correo@dominio.com)'
         }),
         error_messages={'unique':"El email ingresado ya existe."}     
         )  
@@ -39,7 +39,7 @@ class RegisterForm(UserCreationForm):
         attrs={
         'id':'first_name',
         'class':'form-control',
-        'placeholder':'Ingrese nombre'
+        'placeholder':'Nombre'
         }
     ))
 
@@ -47,7 +47,7 @@ class RegisterForm(UserCreationForm):
         attrs={
         'id':'last_name',
         'class':'form-control',
-        'placeholder':'Ingrese apellido'
+        'placeholder':'Apellido'
         }
     ))
 
@@ -55,7 +55,7 @@ class RegisterForm(UserCreationForm):
         attrs={
         'id':'password1',
         'class':'form-control',
-        'placeholder':'Ingrese contraseña'
+        'placeholder':'Contraseña'
         }
     ))   
 
